@@ -17,6 +17,8 @@ socket.on('connect', function() {
         } else {
             $('#log').append('<li class="list-group-item list-group-item-danger"><b style="color: #000">></b> Error: Not logged in! Check the config/config.json file</li>')
         }
+        $('#console').scrollTop($('#console')[0].scrollHeight);
+        console.log($('#console')[0].scrollHeight)
         $('#cmd').val('').focus()
     })
 })

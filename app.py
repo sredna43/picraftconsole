@@ -17,19 +17,22 @@ socketio = SocketIO(app)
 with open('config/config.json') as f:
     cfg = json.load(f)
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((cfg['host'], cfg['port']))
+def rcon_login():
+    global sock
+    global cfg
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((cfg['host'], cfg['port']))
+        result = mcrcon.login(sock, cfg['password'])
+        app.logger.debug('Result: ' + str(result))
+        socketio.emit('login', {'logged_in': result, 'host': cfg['host'], 'port': str(cfg['port'])})
+    except:
+        socketio.emit('login', {'logged_in': False, 'host': cfg['host'], 'port': str(cfg['port'])})
+        return
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-def rcon_login():
-    global sock
-    global cfg
-    result = mcrcon.login(sock, cfg['password'])
-    app.logger.debug('Result: ' + str(result))
-    socketio.emit('login', {'logged_in': result, 'host': cfg['host'], 'port': str(cfg['port'])})
 
 @socketio.on('connect')
 def rcon_connect():
@@ -54,8 +57,6 @@ def reload_config():
     global cfg
     with open('config/config.json') as f:
         cfg = json.load(f)
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((cfg['host'], cfg['port']))
     socketio.emit('response', {'response': 'Config reloaded'})
     rcon_login()
 
@@ -66,5 +67,6 @@ def shutdown():
 atexit.register(shutdown)
 
 if __name__ == "__main__":
+    rcon_login()
     port = cfg['app_port'] if cfg['app_port'] else 5000
     socketio.run(app, debug=True, host='0.0.0.0', port=port)
