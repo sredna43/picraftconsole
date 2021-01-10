@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PiCraft Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container justify-content-center">
+        <div id="banner" class="jumbotron">
+            <h1>PiCraft Panel</h1>
+        </div>
+        <div class="row justify-content-end">
+            <button id="reload-config" class="btn btn-secondary" style="text-align: center;" data-toggle="tooltip" data-placement="top" title="Reload the config">
+                <i class="material-icons">cached</i> <i class="material-icons">settings</i>
+            </button>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div id="console" class="card card-default" style="height: 400px; max-height: 400px; overflow-y: scroll; padding: 1rem;">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-sm-7">
+                                <i class="material-icons">code</i>
+                            </div>
+                            <div class="col col-sm-1">
+                                <i class="material-icons" id="status-icon">device_unknown</i>
+                            </div>
+                            <div class="col col-sm-4" id="status-text"></div>
+                        </div>
+                    </div>
+                    <div class="overflow-auto">
+                        <ul class="list-group" id="log">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-9 offset-md-1">
+                <form id="cmd-form">
+                    <input id="cmd" type="text" placeholder="Command" class="form-control">
+                </form>
+            </div>
+            <button id="clear-console" class="btn btn-danger" data-toggle="tooltip" data-placement="top" style="text-align: center;" title="Clear the entire console">
+                <i class="material-icons">backspace</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="static/app.js"></script>
+</body>
+
+</html>
