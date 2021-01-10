@@ -1,4 +1,5 @@
 {
+    "app_port": 5001,
     "host": "10.0.0.83",
     "port": 25575,
     "password": "secret123"
