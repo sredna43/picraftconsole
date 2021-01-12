@@ -8,7 +8,7 @@ socket.on('connect', function() {
     })
     var form = $('#cmd-form').on('submit', function(e) {
         e.preventDefault()
-        let command = $('#cmd').val()
+        let command = $('#cmd').val().toLowerCase()
         if (logged_in) {
             socket.emit('command', {
                 data: command,
