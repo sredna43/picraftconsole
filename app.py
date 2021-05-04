@@ -69,4 +69,4 @@ atexit.register(shutdown)
 if __name__ == "__main__":
     rcon_login()
     port = cfg['app_port'] if cfg['app_port'] else 5000
-    socketio.run(app, debug=True, host='0.0.0.0', port=port)
+    socketio.run(app, debug=True, port=port)

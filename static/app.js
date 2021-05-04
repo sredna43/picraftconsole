@@ -1,4 +1,7 @@
-var socket = io.connect('http://' + document.domain + ':' + location.port)
+var base_url = '/'
+var port = location.port == 80 ? ':' + location.port : ''
+
+var socket = io.connect('http://' + document.domain + port + base_url)
 
 var logged_in = false
 
@@ -24,6 +27,7 @@ socket.on('connect', function() {
 })
 
 socket.on('response', function(msg) {
+    console.log(msg)
     if (typeof msg.response !== 'undefined' && !msg.response.includes("Unknown or incomplete command")) {
         $('#log').append('<li class="list-group-item list-group-item-primary"><b style="color: #000">' + '<' + '</b> ' + msg.response + '</li>')
     } else if (typeof msg.response !== 'undefined' && msg.response.includes("Unknown or incomplete command")) {
